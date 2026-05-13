@@ -1,0 +1,343 @@
+
+<h2 class="sr-only">HabitStrike app screen designs — 7 screens: splash, login, OTP, dashboard, add task, analytics, profile</h2>
+<style>
+.wrap{padding:1rem 0.5rem;display:flex;flex-direction:column;gap:2rem;align-items:center}
+.screen-group{width:100%;display:flex;flex-direction:column;align-items:center;gap:6px}
+.slabel{font-size:11px;font-weight:500;color:var(--color-text-tertiary);letter-spacing:.08em;text-transform:uppercase}
+.phone{width:280px;border-radius:32px;border:1.5px solid var(--color-border-secondary);overflow:hidden;background:#0f0c2e}
+.sbar{display:flex;justify-content:space-between;align-items:center;padding:10px 18px 4px;font-size:10px;color:#fff;opacity:.8}
+.notch{width:70px;height:16px;background:#0f0c2e;border-radius:0 0 10px 10px;margin:0 auto}
+
+.splash{min-height:480px;background:#0f0c2e;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:2rem}
+.splash-icon{width:64px;height:64px;background:#534AB7;border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:32px}
+.splash-title{font-size:22px;font-weight:700;color:#fff;letter-spacing:-.02em}
+.splash-sub{font-size:13px;color:#AFA9EC;text-align:center}
+.splash-dot{width:6px;height:6px;border-radius:50%;background:#534AB7}
+.splash-dots{display:flex;gap:5px;margin-top:24px}
+.splash-dot.active{background:#9FE1CB;width:18px;border-radius:3px}
+
+.screen-body{background:#f7f6ff;min-height:460px;padding:16px}
+.screen-body.dark{background:#0f0c2e;color:#fff}
+
+.purple-btn{background:#534AB7;color:#fff;border:none;border-radius:12px;padding:12px 0;width:100%;font-size:14px;font-weight:500;cursor:pointer;margin-top:8px}
+.ghost-input{background:rgba(255,255,255,.08);border:0.5px solid rgba(255,255,255,.2);border-radius:10px;padding:12px 14px;color:#fff;font-size:14px;width:100%;margin-top:6px}
+.field-label{font-size:12px;color:#AFA9EC;margin-top:12px}
+
+.otp-row{display:flex;gap:8px;margin-top:10px;justify-content:center}
+.otp-box{width:42px;height:48px;background:rgba(255,255,255,.08);border:0.5px solid #534AB7;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:500;color:#fff}
+.otp-box.filled{background:rgba(83,74,183,.3)}
+
+.dash-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px}
+.dash-date{font-size:12px;color:#888780}
+.dash-title{font-size:16px;font-weight:500;color:#26215C;margin-top:2px}
+.streak-pill{background:#EEEDFE;border-radius:20px;padding:5px 10px;display:flex;align-items:center;gap:4px;font-size:12px;color:#534AB7;font-weight:500}
+.progress-bar-wrap{background:#EEEDFE;border-radius:8px;height:8px;margin:12px 0 4px;overflow:hidden}
+.progress-bar{height:100%;background:#534AB7;border-radius:8px;width:71%}
+.prog-label{display:flex;justify-content:space-between;font-size:11px;color:#888780}
+.task-item{background:#fff;border:0.5px solid #D3D1C7;border-radius:12px;padding:10px 12px;display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.task-check{width:22px;height:22px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0}
+.task-check.done{background:#EAF3DE;color:#3B6D11}
+.task-check.miss{background:#FCEBEB;color:#A32D2D}
+.task-check.pend{background:#EEEDFE;border:1.5px dashed #AFA9EC}
+.task-name{font-size:13px;color:#26215C;font-weight:500;flex:1}
+.task-name.done{text-decoration:line-through;color:#B4B2A9}
+.task-cat{font-size:10px;color:#888780}
+.tab-bar{display:flex;background:#fff;border-top:0.5px solid #D3D1C7;padding:8px 0 6px}
+.tab-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;font-size:9px;color:#B4B2A9}
+.tab-item.active{color:#534AB7}
+.tab-item i{font-size:18px}
+
+.add-header{display:flex;align-items:center;gap:8px;margin-bottom:16px}
+.add-back{width:28px;height:28px;border-radius:8px;background:#EEEDFE;display:flex;align-items:center;justify-content:center}
+.add-title{font-size:15px;font-weight:500;color:#26215C}
+.emoji-row{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+.emoji-chip{width:36px;height:36px;background:#EEEDFE;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;cursor:pointer}
+.emoji-chip.sel{background:#534AB7}
+.light-input{background:#fff;border:0.5px solid #D3D1C7;border-radius:10px;padding:10px 12px;font-size:13px;color:#26215C;width:100%;margin-top:6px}
+.cat-row{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.cat-chip{padding:4px 10px;border-radius:20px;font-size:11px;font-weight:500;cursor:pointer;border:0.5px solid #D3D1C7;color:#5F5E5A;background:#fff}
+.cat-chip.sel{background:#534AB7;color:#fff;border-color:#534AB7}
+
+.metric-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:12px 0}
+.metric-card{background:#fff;border:0.5px solid #D3D1C7;border-radius:10px;padding:10px 12px}
+.metric-val{font-size:20px;font-weight:500;color:#26215C}
+.metric-lbl{font-size:10px;color:#888780;margin-top:2px}
+.bar-wrap{display:flex;align-items:flex-end;gap:5px;height:70px;margin:12px 0 4px}
+.bar-col{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px}
+.bar{width:100%;background:#534AB7;border-radius:4px 4px 0 0;opacity:.85}
+.bar.low{background:#E24B4A;opacity:.7}
+.bar-day{font-size:9px;color:#888780}
+.section-title{font-size:12px;font-weight:500;color:#26215C;margin:14px 0 8px}
+.insight-row{display:flex;align-items:center;gap:8px;background:#fff;border:0.5px solid #D3D1C7;border-radius:10px;padding:8px 10px;margin-bottom:6px}
+.ins-icon{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+.ins-name{font-size:12px;font-weight:500;color:#26215C}
+.ins-rate{font-size:10px}
+.rate-bar{height:4px;border-radius:2px;margin-top:4px;background:#D3D1C7;overflow:hidden}
+.rate-fill{height:100%;border-radius:2px}
+
+.profile-avatar{width:56px;height:56px;border-radius:18px;background:#534AB7;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:700;color:#fff;margin:0 auto 10px}
+.profile-name{text-align:center;font-size:15px;font-weight:500;color:#26215C}
+.profile-phone{text-align:center;font-size:12px;color:#888780;margin-top:2px}
+.stat-row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:14px 0}
+.stat-card{background:#fff;border:0.5px solid #D3D1C7;border-radius:10px;padding:10px;text-align:center}
+.stat-val{font-size:18px;font-weight:500;color:#534AB7}
+.stat-lbl{font-size:10px;color:#888780;margin-top:2px}
+.logout-btn{width:100%;padding:11px;border-radius:12px;border:0.5px solid #E24B4A;background:#FCEBEB;color:#A32D2D;font-size:13px;font-weight:500;cursor:pointer;margin-top:8px}
+</style>
+
+<div class="wrap">
+
+<div class="screen-group">
+<div class="slabel">1 — Splash</div>
+<div class="phone">
+  <div style="background:#0f0c2e">
+    <div class="sbar"><span>9:41</span><span style="display:flex;gap:4px;align-items:center"><i class="ti ti-wifi" style="font-size:12px"></i><i class="ti ti-battery" style="font-size:12px"></i></span></div>
+    <div class="notch"></div>
+  </div>
+  <div class="splash">
+    <div class="splash-icon">⚡</div>
+    <div class="splash-title">HabitStrike</div>
+    <div class="splash-sub">Build streaks. Track consistency.<br>Win every day.</div>
+    <div class="splash-dots">
+      <div class="splash-dot active"></div>
+      <div class="splash-dot"></div>
+      <div class="splash-dot"></div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="screen-group">
+<div class="slabel">2 — Login</div>
+<div class="phone">
+  <div style="background:#0f0c2e">
+    <div class="sbar"><span>9:41</span><span style="display:flex;gap:4px;align-items:center"><i class="ti ti-wifi" style="font-size:12px"></i><i class="ti ti-battery" style="font-size:12px"></i></span></div>
+    <div class="notch"></div>
+  </div>
+  <div class="screen-body dark" style="padding:24px 20px">
+    <div style="font-size:22px;font-weight:700;color:#fff;margin-bottom:6px">Sign in</div>
+    <div style="font-size:13px;color:#AFA9EC;margin-bottom:24px">Enter your mobile number to continue</div>
+    <div class="field-label">Mobile number</div>
+    <div style="display:flex;gap:8px;margin-top:6px">
+      <div style="background:rgba(255,255,255,.08);border:0.5px solid rgba(255,255,255,.2);border-radius:10px;padding:12px 10px;color:#AFA9EC;font-size:13px;white-space:nowrap">+91</div>
+      <div style="background:rgba(255,255,255,.08);border:0.5px solid #534AB7;border-radius:10px;padding:12px 14px;color:#fff;font-size:13px;flex:1">98765 43210</div>
+    </div>
+    <button class="purple-btn" style="margin-top:20px">Send OTP <i class="ti ti-arrow-right" style="vertical-align:-2px"></i></button>
+    <div style="font-size:11px;color:#888780;text-align:center;margin-top:14px">OTP via Firebase • Session saved locally</div>
+  </div>
+</div>
+</div>
+
+<div class="screen-group">
+<div class="slabel">3 — OTP verify</div>
+<div class="phone">
+  <div style="background:#0f0c2e">
+    <div class="sbar"><span>9:41</span><span style="display:flex;gap:4px;align-items:center"><i class="ti ti-wifi" style="font-size:12px"></i><i class="ti ti-battery" style="font-size:12px"></i></span></div>
+    <div class="notch"></div>
+  </div>
+  <div class="screen-body dark" style="padding:24px 20px">
+    <div style="font-size:22px;font-weight:700;color:#fff;margin-bottom:6px">Verify OTP</div>
+    <div style="font-size:13px;color:#AFA9EC;margin-bottom:24px">Sent to +91 98765 43210</div>
+    <div class="otp-row">
+      <div class="otp-box filled">9</div>
+      <div class="otp-box filled">4</div>
+      <div class="otp-box filled">2</div>
+      <div class="otp-box filled">1</div>
+      <div class="otp-box" style="border-color:rgba(255,255,255,.2)"></div>
+      <div class="otp-box" style="border-color:rgba(255,255,255,.2)"></div>
+    </div>
+    <button class="purple-btn" style="margin-top:20px;opacity:.5">Verify & continue</button>
+    <div style="display:flex;justify-content:center;margin-top:14px;gap:4px;font-size:12px;color:#888780">Resend in <span style="color:#AFA9EC;font-weight:500">0:38</span></div>
+  </div>
+</div>
+</div>
+
+<div class="screen-group">
+<div class="slabel">4 — Dashboard</div>
+<div class="phone">
+  <div style="background:#534AB7">
+    <div class="sbar" style="background:#534AB7"><span>9:41</span><span style="display:flex;gap:4px;align-items:center"><i class="ti ti-wifi" style="font-size:12px"></i><i class="ti ti-battery" style="font-size:12px"></i></span></div>
+    <div class="notch" style="background:#534AB7"></div>
+  </div>
+  <div style="background:#534AB7;padding:12px 16px 20px">
+    <div class="dash-header" style="margin-bottom:6px">
+      <div>
+        <div style="font-size:11px;color:#AFA9EC">Wednesday, 13 May</div>
+        <div style="font-size:16px;font-weight:500;color:#fff;margin-top:2px">Good morning!</div>
+      </div>
+      <div class="streak-pill" style="background:rgba(255,255,255,.15);color:#fff">
+        <i class="ti ti-flame" style="font-size:14px;color:#FAC775" aria-hidden="true"></i> 12 streak
+      </div>
+    </div>
+    <div style="background:rgba(255,255,255,.12);border-radius:12px;padding:10px 12px;margin-top:8px">
+      <div style="display:flex;justify-content:space-between;font-size:11px;color:#AFA9EC;margin-bottom:6px">
+        <span>Today's progress</span><span style="color:#9FE1CB;font-weight:500">5 / 7 done</span>
+      </div>
+      <div style="background:rgba(255,255,255,.15);border-radius:8px;height:6px;overflow:hidden">
+        <div style="width:71%;height:100%;background:#9FE1CB;border-radius:8px"></div>
+      </div>
+    </div>
+  </div>
+  <div class="screen-body" style="border-radius:20px 20px 0 0;margin-top:-14px;padding:16px 14px;min-height:320px">
+    <div style="font-size:12px;font-weight:500;color:#26215C;margin-bottom:10px">Today's habits</div>
+    <div class="task-item">
+      <div class="task-check done"><i class="ti ti-check" style="font-size:13px" aria-hidden="true"></i></div>
+      <div><div class="task-name done">Morning workout</div><div class="task-cat">Health • 7:00 AM</div></div>
+    </div>
+    <div class="task-item">
+      <div class="task-check done"><i class="ti ti-check" style="font-size:13px" aria-hidden="true"></i></div>
+      <div><div class="task-name done">Read 20 pages</div><div class="task-cat">Learning • 8:30 AM</div></div>
+    </div>
+    <div class="task-item" style="border-color:#534AB7">
+      <div class="task-check pend"></div>
+      <div><div class="task-name">Meditation</div><div class="task-cat">Wellness • pending</div></div>
+    </div>
+    <div class="task-item">
+      <div class="task-check miss"><i class="ti ti-x" style="font-size:13px" aria-hidden="true"></i></div>
+      <div><div class="task-name" style="color:#B4B2A9">Cold shower</div><div class="task-cat">Health • missed</div></div>
+    </div>
+  </div>
+  <div class="tab-bar">
+    <div class="tab-item active"><i class="ti ti-home" aria-hidden="true"></i>Home</div>
+    <div class="tab-item"><i class="ti ti-plus" aria-hidden="true"></i>Add</div>
+    <div class="tab-item"><i class="ti ti-chart-bar" aria-hidden="true"></i>Stats</div>
+    <div class="tab-item"><i class="ti ti-user" aria-hidden="true"></i>Profile</div>
+  </div>
+</div>
+</div>
+
+<div class="screen-group">
+<div class="slabel">5 — Add task</div>
+<div class="phone">
+  <div style="background:#f7f6ff">
+    <div class="sbar" style="background:#f7f6ff;color:#26215C;opacity:1"><span>9:41</span><span style="display:flex;gap:4px;align-items:center"><i class="ti ti-wifi" style="font-size:12px"></i><i class="ti ti-battery" style="font-size:12px"></i></span></div>
+    <div class="notch" style="background:#f7f6ff"></div>
+  </div>
+  <div class="screen-body" style="min-height:440px">
+    <div class="add-header">
+      <div class="add-back"><i class="ti ti-arrow-left" style="font-size:15px;color:#534AB7" aria-hidden="true"></i></div>
+      <div class="add-title">New habit</div>
+    </div>
+    <div style="font-size:11px;color:#888780;margin-bottom:6px">Pick icon</div>
+    <div class="emoji-row">
+      <div class="emoji-chip sel">🏋️</div>
+      <div class="emoji-chip">📚</div>
+      <div class="emoji-chip">🧘</div>
+      <div class="emoji-chip">💧</div>
+      <div class="emoji-chip">🛌</div>
+      <div class="emoji-chip">✍️</div>
+    </div>
+    <div style="font-size:11px;color:#888780;margin-bottom:4px;margin-top:10px">Habit name</div>
+    <div class="light-input">Morning workout</div>
+    <div style="font-size:11px;color:#888780;margin-bottom:4px;margin-top:10px">Category</div>
+    <div class="cat-row">
+      <div class="cat-chip sel">Health</div>
+      <div class="cat-chip">Learning</div>
+      <div class="cat-chip">Wellness</div>
+      <div class="cat-chip">Work</div>
+    </div>
+    <button class="purple-btn" style="margin-top:18px">Save habit</button>
+  </div>
+  <div class="tab-bar">
+    <div class="tab-item"><i class="ti ti-home" aria-hidden="true"></i>Home</div>
+    <div class="tab-item active"><i class="ti ti-plus" aria-hidden="true"></i>Add</div>
+    <div class="tab-item"><i class="ti ti-chart-bar" aria-hidden="true"></i>Stats</div>
+    <div class="tab-item"><i class="ti ti-user" aria-hidden="true"></i>Profile</div>
+  </div>
+</div>
+</div>
+
+<div class="screen-group">
+<div class="slabel">6 — Analytics</div>
+<div class="phone">
+  <div style="background:#f7f6ff">
+    <div class="sbar" style="background:#f7f6ff;color:#26215C;opacity:1"><span>9:41</span><span style="display:flex;gap:4px;align-items:center"><i class="ti ti-wifi" style="font-size:12px"></i><i class="ti ti-battery" style="font-size:12px"></i></span></div>
+    <div class="notch" style="background:#f7f6ff"></div>
+  </div>
+  <div class="screen-body" style="min-height:460px">
+    <div style="font-size:15px;font-weight:500;color:#26215C;margin-bottom:12px">Analytics</div>
+    <div style="display:flex;gap:6px;margin-bottom:12px">
+      <div style="padding:5px 12px;background:#534AB7;color:#fff;border-radius:20px;font-size:11px;font-weight:500">Week</div>
+      <div style="padding:5px 12px;background:#EEEDFE;color:#534AB7;border-radius:20px;font-size:11px;font-weight:500">Month</div>
+      <div style="padding:5px 12px;background:#EEEDFE;color:#534AB7;border-radius:20px;font-size:11px;font-weight:500">Year</div>
+    </div>
+    <div class="metric-grid">
+      <div class="metric-card"><div class="metric-val">71%</div><div class="metric-lbl">Completion rate</div></div>
+      <div class="metric-card"><div class="metric-val">5.0</div><div class="metric-lbl">Daily avg done</div></div>
+      <div class="metric-card"><div class="metric-val">6</div><div class="metric-lbl">Active days</div></div>
+      <div class="metric-card" style="border-color:#F7C1C1"><div class="metric-val" style="color:#A32D2D">1</div><div class="metric-lbl" style="color:#A32D2D">Missed days</div></div>
+    </div>
+    <div style="font-size:11px;color:#888780;margin-bottom:4px">Daily completions this week</div>
+    <div class="bar-wrap">
+      <div class="bar-col"><div class="bar" style="height:55px"></div><div class="bar-day">Mon</div></div>
+      <div class="bar-col"><div class="bar" style="height:70px"></div><div class="bar-day">Tue</div></div>
+      <div class="bar-col"><div class="bar low" style="height:20px"></div><div class="bar-day">Wed</div></div>
+      <div class="bar-col"><div class="bar" style="height:62px"></div><div class="bar-day">Thu</div></div>
+      <div class="bar-col"><div class="bar" style="height:48px"></div><div class="bar-day">Fri</div></div>
+      <div class="bar-col"><div class="bar" style="height:65px;opacity:.4"></div><div class="bar-day">Sat</div></div>
+      <div class="bar-col"><div class="bar" style="height:40px;opacity:.4"></div><div class="bar-day">Sun</div></div>
+    </div>
+    <div class="section-title">Behavior insights</div>
+    <div class="insight-row">
+      <div class="ins-icon" style="background:#EAF3DE;font-size:14px">🔥</div>
+      <div style="flex:1">
+        <div class="ins-name">Morning workout</div>
+        <div class="rate-bar"><div class="rate-fill" style="width:88%;background:#3B6D11"></div></div>
+        <div class="ins-rate" style="color:#3B6D11;margin-top:2px">88% strike rate</div>
+      </div>
+    </div>
+    <div class="insight-row">
+      <div class="ins-icon" style="background:#FAEEDA">⚠️</div>
+      <div style="flex:1">
+        <div class="ins-name">Cold shower</div>
+        <div class="rate-bar"><div class="rate-fill" style="width:32%;background:#E24B4A"></div></div>
+        <div class="ins-rate" style="color:#A32D2D;margin-top:2px">32% strike rate</div>
+      </div>
+    </div>
+  </div>
+  <div class="tab-bar">
+    <div class="tab-item"><i class="ti ti-home" aria-hidden="true"></i>Home</div>
+    <div class="tab-item"><i class="ti ti-plus" aria-hidden="true"></i>Add</div>
+    <div class="tab-item active"><i class="ti ti-chart-bar" aria-hidden="true"></i>Stats</div>
+    <div class="tab-item"><i class="ti ti-user" aria-hidden="true"></i>Profile</div>
+  </div>
+</div>
+</div>
+
+<div class="screen-group">
+<div class="slabel">7 — Profile</div>
+<div class="phone">
+  <div style="background:#f7f6ff">
+    <div class="sbar" style="background:#f7f6ff;color:#26215C;opacity:1"><span>9:41</span><span style="display:flex;gap:4px;align-items:center"><i class="ti ti-wifi" style="font-size:12px"></i><i class="ti ti-battery" style="font-size:12px"></i></span></div>
+    <div class="notch" style="background:#f7f6ff"></div>
+  </div>
+  <div class="screen-body" style="min-height:420px">
+    <div style="font-size:15px;font-weight:500;color:#26215C;margin-bottom:16px">Profile</div>
+    <div class="profile-avatar">IR</div>
+    <div class="profile-name">Irshad</div>
+    <div class="profile-phone">+91 98765 43210</div>
+    <div class="stat-row">
+      <div class="stat-card"><div class="stat-val">24</div><div class="stat-lbl">Tasks created</div></div>
+      <div class="stat-card"><div class="stat-val">412</div><div class="stat-lbl">Total completed</div></div>
+      <div class="stat-card"><div class="stat-val">12</div><div class="stat-lbl">Current streak</div></div>
+      <div class="stat-card" style="border-color:#CECBF6"><div class="stat-val" style="color:#534AB7">78%</div><div class="stat-lbl">Consistency</div></div>
+    </div>
+    <div style="background:#EEEDFE;border-radius:10px;padding:10px 12px;margin-top:4px;display:flex;align-items:center;gap:10px">
+      <i class="ti ti-trophy" style="font-size:20px;color:#534AB7" aria-hidden="true"></i>
+      <div>
+        <div style="font-size:12px;font-weight:500;color:#3C3489">Longest streak: 21 days</div>
+        <div style="font-size:10px;color:#5F5E5A">Best week: Apr 7–13</div>
+      </div>
+    </div>
+    <button class="logout-btn"><i class="ti ti-logout" style="vertical-align:-2px;margin-right:4px" aria-hidden="true"></i>Logout</button>
+  </div>
+  <div class="tab-bar">
+    <div class="tab-item"><i class="ti ti-home" aria-hidden="true"></i>Home</div>
+    <div class="tab-item"><i class="ti ti-plus" aria-hidden="true"></i>Add</div>
+    <div class="tab-item"><i class="ti ti-chart-bar" aria-hidden="true"></i>Stats</div>
+    <div class="tab-item active"><i class="ti ti-user" aria-hidden="true"></i>Profile</div>
+  </div>
+</div>
+</div>
+
+</div>
