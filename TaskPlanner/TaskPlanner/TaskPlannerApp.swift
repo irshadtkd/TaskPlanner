@@ -9,9 +9,13 @@ import SwiftUI
 
 @main
 struct TaskPlannerApp: App {
+    
+    @StateObject private var router = AppRouter()
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(router)
         }
     }
 }
